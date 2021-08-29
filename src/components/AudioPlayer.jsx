@@ -13,6 +13,8 @@ export default function AudioPlayer() {
   const [play, playState] = useState(0);
   const [player, setPlayer] = useState(new Audio('src/audio/guitar-sample-1.wav'))
   const [rightClick, setRightClick] = useState(false);
+  const [leftClick, setLeftClick] = useState(false);
+
 
   // console.log('audioObj', player)
   // console.log(getKeys(player));
@@ -29,10 +31,14 @@ export default function AudioPlayer() {
 
   const advanceTime = () => {
     setRightClick(true);
-    console.log('advancing time');
     player.currentTime = player.currentTime + 0.5;
-    console.log(player.currentTime);
-    return
+    console.log(`advancing time to ${player.currentTime}`);
+  }
+
+  const retreatTime = () => {
+    setLeftClick(true);
+    player.currentTime = player.currentTime - 0.5;
+    console.log(`retreating time to ${player.currentTime}`);
   }
 
   useEffect(() => {
@@ -49,18 +55,24 @@ export default function AudioPlayer() {
 
   return (
     <div>
-      <h1>AudioPlayer</h1>
+      <h1>Plaeback</h1>
+      <h3>AudioPlayer</h3>
       <div className="light__wrapper">
         <div className={`light ${play ? 'light--on' : ''}`}>
         </div>
       </div>
       <div className="row">
-        <div className="button">&larr;</div>
-        <div className="button" onClick={() => { play ? playState(false) : playState(true) }}>
-          {
-            play ? <div>&mdash;</div> : <div>&gt;</div>
-          }
+        {/* Rewind Button */}
+        <div onClick={() => { retreatTime() }}
+          className={`button  ${leftClick ? 'clicked' : ''}`}
+          onAnimationEnd={() => setRightClick(false)}>&larr;</div>
+        {/* Play/Stop Button */}
+        <div
+          className="button"
+          onClick={() => { play ? playState(false) : playState(true) }}>
+          {play ? <div>&mdash;</div> : <div>&gt;</div>}
         </div>
+        {/* Advance Button */}
         <div
           onClick={() => { advanceTime() }}
           className={`button  ${rightClick ? 'clicked' : ''}`}
