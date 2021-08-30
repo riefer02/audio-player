@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux'
 import '../assets/styles/audioplayer.css';
 
 const getKeys = function (obj) {
@@ -10,8 +11,9 @@ const getKeys = function (obj) {
 }
 
 export default function AudioPlayer() {
+  const playlist = useSelector((state) => state.audio.audioPlayList)
   const [play, playState] = useState(0);
-  const [player, setPlayer] = useState(new Audio('src/audio/guitar-sample-1.wav'))
+  const [player, setPlayer] = useState(playlist[0])
   const [rightClick, setRightClick] = useState(false);
   const [leftClick, setLeftClick] = useState(false);
 
