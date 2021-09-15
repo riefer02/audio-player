@@ -14,8 +14,6 @@ export const audioSlice = createSlice({
       for (let i = 0; i < files.length; i++) {
         let file = files.item(i);
         file = new Audio(file);
-        console.log(file.name);
-        console.log(file);
         state.audioPlayList.push(file);
       }
     },

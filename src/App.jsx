@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AudioPlayer from './components/AudioPlayer'
 import FileLoader from './components/FileLoader';
-import './App.css';
+import './assets/styles/app.css';
 
 function App() {
 

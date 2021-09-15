@@ -22,3 +22,15 @@
   top: 0;
   opacity: 0;
 }
+
+.uploader__input {
+  display: inline-block;
+  width: 100%;
+}
+
+.uploader__file-list {
+  margin-top: 0.5rem;
+}
+
+.uploader__file-item {
+}

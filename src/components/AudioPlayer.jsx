@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
-import '../assets/styles/audioplayer.css';
 
 const getKeys = function (obj) {
   var keys = [];
@@ -17,6 +16,7 @@ export default function AudioPlayer() {
   const [rightClick, setRightClick] = useState(false);
   const [leftClick, setLeftClick] = useState(false);
 
+  console.log(playlist[0])
 
   // console.log('audioObj', player)
   // console.log(getKeys(player));
@@ -57,7 +57,7 @@ export default function AudioPlayer() {
 
   return (
     <div>
-      <h1>Plaeback</h1>
+      <h1>Plaebak</h1>
       <h3>AudioPlayer</h3>
       <div className="light__wrapper">
         <div className={`light ${play ? 'light--on' : ''}`}>
