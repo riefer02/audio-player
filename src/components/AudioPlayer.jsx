@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPlayState } from '../features/audioSlice';
+import { setPlayState, setCurIndex } from '../features/audioSlice';
 
 export default function AudioPlayer() {
   const dispatch = useDispatch();
   const playlist = useSelector((state) => state.audio.audioPlayList)
   const isPlaying = useSelector((state) => state.audio.isPlaying)
-  const [curIndex, setCurIndex] = useState(0);
+  const curIndex = useSelector((state) => state.audio.curAudioIndex)
   const [player, setPlayer] = useState(new Audio())
   const [rightClick, setRightClick] = useState(false);
   const [leftClick, setLeftClick] = useState(false);
 
+  useEffect(() => {
+    handleAudioSrc(playlist, curIndex);
+  }, [])
+
+
   const handleAudioSrc = (list, curIndex) => {
-    setPlayer(list[curIndex]);
+    setPlayer(new Audio(list[curIndex]));
   }
 
   const changeAudioSrc = (curIndex, isForward) => {
     const newIndex = isForward ? curIndex + 1 : curIndex - 1;
-    setCurIndex(newIndex);
+    dispatch(setCurIndex(newIndex));
   }
 
   const advanceTime = () => {
@@ -43,7 +48,6 @@ export default function AudioPlayer() {
     console.log('here')
     player.addEventListener('ended', () => {
       console.log('ended');
-      // setPlayState(0);
     })
   }, [player])
 

@@ -10,7 +10,6 @@ export default function FileLoader() {
 
     const handleUpload = () => {
         const currentFiles = audioInput.current.files;
-        setFiles(currentFiles)
 
         let fileNames = Array.from(currentFiles);
         fileNames = fileNames.map(file => file.name)
@@ -19,7 +18,7 @@ export default function FileLoader() {
         let newAudioElements = Array.from(currentFiles);
         newAudioElements = newAudioElements.map(file => {
             let newAudioTrack = URL.createObjectURL(file);
-            newAudioTrack = new Audio(newAudioTrack);
+            // newAudioTrack = new Audio(newAudioTrack);
             return newAudioTrack;
         })
 
