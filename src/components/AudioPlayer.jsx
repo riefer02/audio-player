@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setPlayState } from '../features/audioSlice';
 
 export default function AudioPlayer() {
+  const dispatch = useDispatch();
   const playlist = useSelector((state) => state.audio.audioPlayList)
-  const [isPlaying, setPlayState] = useState(0);
+  const isPlaying = useSelector((state) => state.audio.isPlaying)
   const [curIndex, setCurIndex] = useState(0);
   const [player, setPlayer] = useState(new Audio())
   const [rightClick, setRightClick] = useState(false);
@@ -38,9 +40,10 @@ export default function AudioPlayer() {
   }, [isPlaying])
 
   useEffect(() => {
+    console.log('here')
     player.addEventListener('ended', () => {
       console.log('ended');
-      setPlayState(0);
+      // setPlayState(0);
     })
   }, [player])
 
@@ -62,7 +65,7 @@ export default function AudioPlayer() {
         {/* Play/Stop Button */}
         <div
           className="button"
-          onClick={() => { isPlaying ? setPlayState(false) : setPlayState(true) }}>
+          onClick={() => { isPlaying ? dispatch(setPlayState(false)) : dispatch(setPlayState(true)) }}>
           {isPlaying ? <div>&mdash;</div> : <div>&gt;</div>}
         </div>
         {/* Advance Button */}

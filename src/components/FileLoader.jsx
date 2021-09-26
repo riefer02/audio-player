@@ -1,11 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux'
-// import { useSelector } from 'react-redux'
 import { addToPlayList } from '../features/audioSlice';
 
 export default function FileLoader() {
-    // const playlist = useSelector((state) => state.audio.audioPlayList)
-    const [files, setFiles] = useState([]);
     const [filenameList, setFilenamesList] = useState(['Please Upload Your Audio'])
     const audioInput = useRef(null);
     const dispatch = useDispatch();
@@ -13,7 +10,6 @@ export default function FileLoader() {
 
     const handleUpload = () => {
         const currentFiles = audioInput.current.files;
-        console.log(currentFiles)
         setFiles(currentFiles)
 
         let fileNames = Array.from(currentFiles);
