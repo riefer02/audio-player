@@ -26,7 +26,8 @@ export default function FileLoader() {
             newAudioTrack = new Audio(newAudioTrack);
             return newAudioTrack;
         })
-        dispatch(addToPlayList(currentFiles))
+
+        dispatch(addToPlayList(newAudioElements))
     }
 
     return (

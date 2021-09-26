@@ -1,57 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 
-const getKeys = function (obj) {
-  var keys = [];
-  for (var key in obj) {
-    keys.push(key);
-  }
-  return keys;
-}
-
 export default function AudioPlayer() {
   const playlist = useSelector((state) => state.audio.audioPlayList)
-  const [play, playState] = useState(0);
-  const [player, setPlayer] = useState(playlist[0])
+  const [isPlaying, setPlayState] = useState(0);
+  const [curIndex, setCurIndex] = useState(0);
+  const [player, setPlayer] = useState(new Audio())
   const [rightClick, setRightClick] = useState(false);
   const [leftClick, setLeftClick] = useState(false);
 
-  console.log(playlist[0])
+  const handleAudioSrc = (list, curIndex) => {
+    setPlayer(list[curIndex]);
+  }
 
-  // console.log('audioObj', player)
-  // console.log(getKeys(player));
-  // console.log('readyState', player.readyState);
-  // console.log('dataStreamStrength', player.HAVE_ENOUGH_DATA);
-  // console.log('autoplay', player.autoplay);
-  // console.log('playbackRate', player.playbackRate);
-
-
-  player.addEventListener('canplaythrough', (event) => {
-    // console.log('`canplaythrough` event triggered');
-    // console.log('Audio Duration', player.duration);
-  })
+  const changeAudioSrc = (curIndex, isForward) => {
+    const newIndex = isForward ? curIndex + 1 : curIndex - 1;
+    setCurIndex(newIndex);
+  }
 
   const advanceTime = () => {
     setRightClick(true);
     player.currentTime = player.currentTime + 0.5;
-    console.log(`advancing time to ${player.currentTime}`);
   }
 
   const retreatTime = () => {
     setLeftClick(true);
     player.currentTime = player.currentTime - 0.5;
-    console.log(`retreating time to ${player.currentTime}`);
+
   }
 
   useEffect(() => {
-    if (!play) player.pause();
-    if (play) player.play();
-  }, [play])
+    handleAudioSrc(playlist, curIndex);
+  }, [curIndex, playlist])
+
+  useEffect(() => {
+    !isPlaying ? player.pause() : player.play();
+  }, [isPlaying])
 
   useEffect(() => {
     player.addEventListener('ended', () => {
       console.log('ended');
-      playState(0);
+      setPlayState(0);
     })
   }, [player])
 
@@ -59,8 +48,10 @@ export default function AudioPlayer() {
     <div>
       <h1>Plaebak</h1>
       <h3>AudioPlayer</h3>
+      <button onClick={() => { changeAudioSrc(curIndex, 0) }}>Prev Song</button ><button onClick={() => { changeAudioSrc(curIndex, 1) }}>Next Song</button>
+      <h4>Currently Playing: { }</h4>
       <div className="light__wrapper">
-        <div className={`light ${play ? 'light--on' : ''}`}>
+        <div className={`light ${isPlaying ? 'light--on' : ''}`}>
         </div>
       </div>
       <div className="row">
@@ -71,8 +62,8 @@ export default function AudioPlayer() {
         {/* Play/Stop Button */}
         <div
           className="button"
-          onClick={() => { play ? playState(false) : playState(true) }}>
-          {play ? <div>&mdash;</div> : <div>&gt;</div>}
+          onClick={() => { isPlaying ? setPlayState(false) : setPlayState(true) }}>
+          {isPlaying ? <div>&mdash;</div> : <div>&gt;</div>}
         </div>
         {/* Advance Button */}
         <div

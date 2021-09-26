@@ -1,3 +1,14 @@
+button {
+  background-color: white;
+  color: #000000;
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 0 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-size: 1rem;
+}
+
 .uploader__wrapper {
   position: relative;
   overflow: hidden;

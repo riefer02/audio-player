@@ -10,12 +10,7 @@ export const audioSlice = createSlice({
   reducers: {
     addToPlayList: (state, action) => {
       const files = action.payload;
-
-      for (let i = 0; i < files.length; i++) {
-        let file = files.item(i);
-        file = new Audio(file);
-        state.audioPlayList.push(file);
-      }
+      files.forEach((file) => state.audioPlayList.push(file));
     },
     removeFromPlayList: (state, action) => {
       state.audioPlayList.filter((audio) => audio.name !== action.payload);
