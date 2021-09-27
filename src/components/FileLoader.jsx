@@ -7,7 +7,6 @@ export default function FileLoader() {
     const audioInput = useRef(null);
     const dispatch = useDispatch();
 
-
     const handleUpload = () => {
         const currentFiles = audioInput.current.files;
 
@@ -18,10 +17,8 @@ export default function FileLoader() {
         let newAudioElements = Array.from(currentFiles);
         newAudioElements = newAudioElements.map(file => {
             let newAudioTrack = URL.createObjectURL(file);
-            // newAudioTrack = new Audio(newAudioTrack);
             return newAudioTrack;
         })
-
         dispatch(addToPlayList(newAudioElements))
     }
 

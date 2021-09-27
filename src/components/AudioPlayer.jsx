@@ -15,14 +15,21 @@ export default function AudioPlayer() {
     handleAudioSrc(playlist, curIndex);
   }, [])
 
-
   const handleAudioSrc = (list, curIndex) => {
     setPlayer(new Audio(list[curIndex]));
   }
 
   const changeAudioSrc = (curIndex, isForward) => {
-    const newIndex = isForward ? curIndex + 1 : curIndex - 1;
-    dispatch(setCurIndex(newIndex));
+    let newIndex = isForward ? curIndex + 1 : curIndex - 1;
+    if (playlist.length === 1 || playlist.length === 0) {
+      return
+    } else if (playlist[newIndex] === undefined) {
+      isForward ? newIndex = playlist[0] : newIdex = playList.at(-1);
+      dispatch(setCurIndex(newIndex));
+      return;
+    } else {
+      dispatch(setCurIndex(newIndex));
+    }
   }
 
   const advanceTime = () => {
@@ -45,7 +52,6 @@ export default function AudioPlayer() {
   }, [isPlaying])
 
   useEffect(() => {
-    console.log('here')
     player.addEventListener('ended', () => {
       console.log('ended');
     })
@@ -55,8 +61,9 @@ export default function AudioPlayer() {
     <div>
       <h1>Plaebak</h1>
       <h3>AudioPlayer</h3>
-      <button onClick={() => { changeAudioSrc(curIndex, 0) }}>Prev Song</button ><button onClick={() => { changeAudioSrc(curIndex, 1) }}>Next Song</button>
-      <h4>Currently Playing: { }</h4>
+      <button onClick={() => { changeAudioSrc(curIndex, 0) }}>Prev Song</button>
+      <button onClick={() => { changeAudioSrc(curIndex, 1) }}>Next Song</button>
+      <h4>Current Song:</h4>
       <div className="light__wrapper">
         <div className={`light ${isPlaying ? 'light--on' : ''}`}>
         </div>
