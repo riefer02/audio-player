@@ -9,6 +9,7 @@ export default function FileLoader() {
 
     const handleUpload = () => {
         const currentFiles = audioInput.current.files;
+        console.log(currentFiles);
 
         let fileNames = Array.from(currentFiles);
         fileNames = fileNames.map(file => file.name)

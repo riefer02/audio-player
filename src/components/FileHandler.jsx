@@ -6,7 +6,6 @@ export default function FileHandler() {
     const [message, setMessage] = useState(`I'm the File Handler Component, thank you for making me real.`)
 
     const handleSubmit = () => {
-        console.log('submitted')
         callAPI()
     }
 
