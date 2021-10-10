@@ -1,0 +1,13 @@
+.file-handler {
+  padding: 3rem;
+  background-color: rgb(111, 111, 111);
+}
+
+.file-handler__message {
+  font-size: 3rem;
+  color: white;
+}
+
+.file-handler__submit-btn {
+  margin-top: 3rem;
+}

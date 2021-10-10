@@ -4,6 +4,7 @@ import FileLoader from './components/FileLoader';
 import PlayList from './components/PlayList';
 import FileReader from './components/FileReader';
 import Layout from './components/Layout';
+import FileHandler from './components/FileHandler';
 import './assets/styles/app.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <AudioPlayer />
         <PlayList />
         <FileReader />
+        <FileHandler />
       </Layout>
     </div>
   );

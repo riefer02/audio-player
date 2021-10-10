@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export default function FileReader() {
@@ -18,6 +18,10 @@ export default function FileReader() {
     }, [curAudioURL])
 
     return (
-        <div>FileReader</div>
+        <div>
+            <h2>FileReader</h2>
+            <h4>Current Index: {curIndex}</h4>
+            <h4>Total Songs: {playlist.length}</h4>
+        </div>
     )
 }

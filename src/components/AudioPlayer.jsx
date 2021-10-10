@@ -24,7 +24,7 @@ export default function AudioPlayer() {
     if (playlist.length === 1 || playlist.length === 0) {
       return
     } else if (playlist[newIndex] === undefined) {
-      isForward ? newIndex = playlist[0] : newIdex = playList.at(-1);
+      isForward ? newIndex = 0 : newIndex = playlist.length - 1;
       dispatch(setCurIndex(newIndex));
       return;
     } else {

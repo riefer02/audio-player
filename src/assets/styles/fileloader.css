@@ -1,11 +1,11 @@
 button {
-  background-color: white;
+  background-color: rgb(242, 242, 242);
   color: #000000;
-  border: 1px solid black;
-  border-radius: 50%;
+  border: 0px solid black;
+  border-radius: 2px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
   padding: 10px;
   margin: 0 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   font-size: 1rem;
 }
 
