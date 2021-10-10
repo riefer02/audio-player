@@ -1,6 +1,23 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux'
 import { addToPlayList } from '../features/audioSlice';
+import { addFiles } from '../features/fileSlice';
+
+const formatData = (files) => {
+    let data = [];
+    files.forEach(file => {
+
+        const fileDocument = {
+            name: file.name,
+            type: file.type ? file.type : 'NA',
+            size: file.size,
+            lastModified: file.lastModified,
+            localUrl: URL.createObjectURL(file)
+        }
+        data.push(fileDocument);
+    })
+    return data;
+}
 
 export default function FileLoader() {
     const [filenameList, setFilenamesList] = useState(['Please Upload Your Audio'])
@@ -9,18 +26,20 @@ export default function FileLoader() {
 
     const handleUpload = () => {
         const currentFiles = audioInput.current.files;
-        console.log(currentFiles);
 
-        let fileNames = Array.from(currentFiles);
-        fileNames = fileNames.map(file => file.name)
+        // Read files for their file names
+        let fileNames = Array.from(currentFiles).map(file => file.name)
         setFilenamesList(fileNames)
 
-        let newAudioElements = Array.from(currentFiles);
-        newAudioElements = newAudioElements.map(file => {
+        // Read files and create binary string
+        let newAudioElements = Array.from(currentFiles).map(file => {
             let newAudioTrack = URL.createObjectURL(file);
             return newAudioTrack;
         })
         dispatch(addToPlayList(newAudioElements))
+
+        // Read files and create meta objects
+        dispatch(addFiles(formatData(Array.from(currentFiles))));
     }
 
     return (
