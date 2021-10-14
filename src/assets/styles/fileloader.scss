@@ -1,12 +1,15 @@
 button {
-  background-color: rgb(242, 242, 242);
+  background-color: white;
   color: #000000;
   border: 0px solid black;
   border-radius: 2px;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
-  padding: 10px;
+  border: 2px solid black;
+  padding: 5px 8px;
   margin: 0 10px;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .uploader__wrapper {
@@ -14,20 +17,28 @@ button {
   overflow: hidden;
   display: inline-block;
   padding: 1rem;
+  grid-area: three;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .uploader__button {
   border: 2px solid black;
   background-color: white;
-  padding: 8px 20px;
-  border-radius: 8px;
-  font-size: 20px;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
   font-weight: bold;
   text-transform: uppercase;
 }
 
+.uploader__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .uploader__wrapper input[type='file'] {
-  font-size: 100px;
   position: absolute;
   left: 0;
   top: 0;

@@ -58,15 +58,14 @@ export default function AudioPlayer() {
   }, [player])
 
   return (
-    <div>
-      <h1>Plaebak</h1>
-      <h3>AudioPlayer</h3>
-      <button onClick={() => { changeAudioSrc(curIndex, 0) }}>Prev Song</button>
-      <button onClick={() => { changeAudioSrc(curIndex, 1) }}>Next Song</button>
-      <h4>Current Song:</h4>
-      <div className="light__wrapper">
-        <div className={`light ${isPlaying ? 'light--on' : ''}`}>
+    <div className="audio-player">
+      <div className="flex w-full align-center justify-center">
+        <div className="light__wrapper">
+          <div className={`light ${isPlaying ? 'light--on' : ''}`}>
+          </div>
         </div>
+        <button onClick={() => { changeAudioSrc(curIndex, 0) }}>Prev Song</button>
+        <button onClick={() => { changeAudioSrc(curIndex, 1) }}>Next Song</button>
       </div>
       <div className="row">
         {/* Rewind Button */}

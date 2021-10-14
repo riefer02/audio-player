@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   filesMeta: [],
   selectedFile: '',
-  //   files: [],
 };
 
 export const fileSlice = createSlice({
@@ -14,9 +13,6 @@ export const fileSlice = createSlice({
       const files = action.payload;
       files.forEach((file) => state.filesMeta.push(file));
     },
-    // addFilesList: (state, action) => {
-    //   state.files = action.payload;
-    // },
   },
 });
 

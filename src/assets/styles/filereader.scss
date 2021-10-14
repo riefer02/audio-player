@@ -1,0 +1,12 @@
+.info-display {
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: gray;
+  color: white;
+  grid-area: 'three';
+
+  h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
