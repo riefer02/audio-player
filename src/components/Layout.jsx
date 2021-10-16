@@ -3,7 +3,7 @@ import Header from './Header';
 
 export default function Layout({ children }) {
     return (
-        <div>
+        <div className="container mx-auto border-2 border-gray-500">
             <Header />
             <div>{children}</div>
         </div>

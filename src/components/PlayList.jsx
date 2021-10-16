@@ -20,6 +20,9 @@ export default function PlayList() {
     }, [playListDisplay])
 
     return (
-        <ul></ul>
+        <div className="playlist">
+            <div className="playlist__header">Playlist</div>
+        </div>
+
     )
 }

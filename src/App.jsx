@@ -12,13 +12,17 @@ function App() {
   return (
     <div>
       <Layout>
-        <div className="row-1 flex justify-start align-middle">
-          <FileLoader />
-          <FileReader />
-          <FileHandler />
+        <div className="container mx-auto">
+          <div className="row-1 flex justify-start align-middle ">
+            <FileLoader />
+            <FileReader />
+            <FileHandler />
+          </div>
+          <div className="flex justify-start align-middle">
+            <AudioPlayer />
+            <PlayList />
+          </div>
         </div>
-        <AudioPlayer />
-        <PlayList />
       </Layout>
     </div>
   );
