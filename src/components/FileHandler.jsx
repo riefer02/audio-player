@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 export default function FileHandler() {
     const filesMeta = useSelector((state) => state.file.filesMeta);
+    const [formattedFilesMeta, setFormattedFilesMeta] = useState([]);
     const [message, setMessage] = useState(`I'm the File Handler Component, thank you for making me real.`)
 
     const handleSubmit = () => {
@@ -14,7 +15,10 @@ export default function FileHandler() {
     const callAPI = async () => {
         const response = await axios.post(
             `${import.meta.env.VITE_API_URL}`,
-            filesMeta
+            formattedFilesMeta,
+            {
+                headers: { 'Content-Type': 'application/json' }
+            }
         )
             .then(res => { return res.data })
             .catch(err => console.log(err.message));
@@ -24,16 +28,32 @@ export default function FileHandler() {
     const fileReader = async (files) => {
         for (const file of files) {
             let blob = await fetch(file.localUrl).then(res => res.blob());
-            console.log(blob)
-
-            // To Do: Handle/Prepare new blob for axios post call to API
+            var fd = new FormData();
+            fd.append('upload', blob, 'myblob.txt');
+            fd.append('upload-meta', JSON.stringify(file))
+            setFormattedFilesMeta(fd);
         }
+
+
+        // let formattedFiles = []
+        // for (const file of files) {
+        //     const formattedFile = { ...file }
+        //     let blob = await fetch(file.localUrl).then(res => res.blob());
+        //     formattedFile.blob = blob;
+        //     formattedFiles.push(formattedFile)
+        // }
+        // setFormattedFilesMeta(formattedFiles);
+
     }
 
     useEffect(() => {
         filesMeta.length > 0 ? setMessage(`I've got some data for you.`) : null
         fileReader(filesMeta)
     }, [filesMeta])
+
+    useEffect(() => {
+        console.log(formattedFilesMeta);
+    }, [formattedFilesMeta])
 
     return (
         <div className="file-handler">

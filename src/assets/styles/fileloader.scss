@@ -32,6 +32,9 @@ button {
   font-size: 0.8rem;
   font-weight: bold;
   text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .uploader__wrapper {
@@ -41,14 +44,34 @@ button {
 
 .uploader__wrapper input[type='file'] {
   position: absolute;
-  left: 0;
   top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
   opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+  cursor: pointer;
+}
+
+input[type=file], /* FF, IE7+, chrome (except button) */
+input[type=file]::-webkit-file-upload-button {
+  /* chromes and blink button */
+  cursor: pointer;
 }
 
 .uploader__input {
   display: inline-block;
   width: 100%;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
 }
 
 .uploader__file-list {

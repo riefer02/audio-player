@@ -42,13 +42,15 @@ export default function FileLoader() {
 
     return (
         <div className="uploader__wrapper">
-            <button className="uploader__button">Upload a file</button>
-            <input
-                className="uploader__input"
-                ref={audioInput}
-                type="file"
-                multiple
-                onInput={handleUpload} />
+            <div>
+                <button className="uploader__button">Upload a file
+                    <input
+                        className="uploader__input"
+                        ref={audioInput}
+                        type="file"
+                        onInput={handleUpload} />
+                </button>
+            </div>
             <div className="uploader__file-list">
                 {filenameList.map((filename, index) =>
                     <div className="uploader__file-item" key={index}>{filename}</div>
