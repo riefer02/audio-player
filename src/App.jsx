@@ -1,7 +1,6 @@
 import React from 'react';
 import AudioPlayer from './components/AudioPlayer'
 import FileLoader from './components/FileLoader';
-import PlayList from './components/PlayList';
 import FileReader from './components/InfoDisplay';
 import Layout from './components/Layout';
 import FileHandler from './components/FileHandler';
@@ -20,7 +19,6 @@ function App() {
           </div>
           <div className="flex justify-start align-middle">
             <AudioPlayer />
-            <PlayList />
           </div>
         </div>
       </Layout>

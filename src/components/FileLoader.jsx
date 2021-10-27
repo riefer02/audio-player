@@ -37,7 +37,6 @@ export default function FileLoader() {
         // Read files and create meta objects
         dispatch(addFiles(formatData(Array.from(currentFiles))));
 
-        // dispatch(addFilesList(currentFiles));
     }
 
     return (

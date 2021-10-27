@@ -33,17 +33,6 @@ export default function FileHandler() {
             fd.append('upload-meta', JSON.stringify(file))
             setFormattedFilesMeta(fd);
         }
-
-
-        // let formattedFiles = []
-        // for (const file of files) {
-        //     const formattedFile = { ...file }
-        //     let blob = await fetch(file.localUrl).then(res => res.blob());
-        //     formattedFile.blob = blob;
-        //     formattedFiles.push(formattedFile)
-        // }
-        // setFormattedFilesMeta(formattedFiles);
-
     }
 
     useEffect(() => {
@@ -52,7 +41,7 @@ export default function FileHandler() {
     }, [filesMeta])
 
     useEffect(() => {
-        console.log(formattedFilesMeta);
+        console.log('Formatted Files Meta Data', formattedFilesMeta);
     }, [formattedFilesMeta])
 
     return (

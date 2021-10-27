@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// const initialSong = {
+//   name: 'Guitar Sample',
+//   fileUrl: 'src/assets/audio/guitar-sample-1.wav',
+//   id: '1',
+// };
+
 const initialState = {
   audioPlayList: ['src/assets/audio/guitar-sample-1.wav'],
   isPlaying: false,
