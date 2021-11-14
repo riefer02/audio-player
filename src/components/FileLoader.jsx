@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux'
 import { addToPlayList } from '../features/audioSlice';
-import { addFiles, addFilesList } from '../features/fileSlice';
+import { addFiles } from '../features/fileSlice';
 
 const formatData = (files) => {
     let data = [];

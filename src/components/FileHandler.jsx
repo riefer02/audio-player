@@ -2,37 +2,37 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-
 export default function FileHandler() {
     const filesMeta = useSelector((state) => state.file.filesMeta);
     const [formattedFilesMeta, setFormattedFilesMeta] = useState([]);
     const [message, setMessage] = useState(`I'm the File Handler Component, thank you for making me real.`)
 
-    const handleSubmit = () => {
-        filesMeta.length > 0 ? callAPI() : setMessage(`There's nothing to send.`)
+    const fileReader = async (files) => {
+        for (const file of files) {
+            let blob = await fetch(file.localUrl).then(res => res.blob());
+            var fd = new FormData();
+            fd.append('upload-meta', JSON.stringify(file));
+            fd.append('upload-file', blob, file.name);
+            setFormattedFilesMeta(fd);
+        }
     }
 
     const callAPI = async () => {
         const response = await axios.post(
-            `${import.meta.env.VITE_API_URL}`,
+            `${import.meta.env.VITE_API_URL}audio/upload`,
             formattedFilesMeta,
             {
                 headers: { 'Content-Type': 'application/json' }
             }
         )
-            .then(res => { return res.data })
-            .catch(err => console.log(err.message));
+            .then(res => res.data)
+            .catch(err => err);
         setMessage(response.message)
     };
 
-    const fileReader = async (files) => {
-        for (const file of files) {
-            let blob = await fetch(file.localUrl).then(res => res.blob());
-            var fd = new FormData();
-            fd.append('upload', blob, 'myblob.txt');
-            fd.append('upload-meta', JSON.stringify(file))
-            setFormattedFilesMeta(fd);
-        }
+    const handleSubmit = () => {
+        // Change to forEach file callAPI()
+        filesMeta.length > 0 ? callAPI() : setMessage(`There's nothing to send.`)
     }
 
     useEffect(() => {

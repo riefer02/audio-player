@@ -7,7 +7,7 @@ export default function InfoDisplay() {
     const [curAudioURL, setCurrentAudioURL] = useState(playlist[curIndex])
 
     const handleFileRead = () => {
-        // new FileReader() doesn't appear to with React hooks
+        // new FileReader() doesn't appear to with React hooks, use new FormData()
     }
 
     useEffect(() => {
