@@ -1,4 +1,4 @@
-const getAboutUsLink = require('../utililties/getAboutUsLink');
+import { getAboutUsLink } from '../utililties/getAboutUsLink';
 
 test('Returns about-us for english language', () => {
   expect(getAboutUsLink('en-US')).toBe('/about-us');

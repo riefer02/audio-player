@@ -1,5 +1,5 @@
 import React from 'react';
-import AudioPlayer from './components/AudioPlayer'
+import AudioPlayer from './components/AudioPlayer';
 import FileLoader from './components/FileLoader';
 import FileReader from './components/InfoDisplay';
 import Layout from './components/Layout';
@@ -7,7 +7,6 @@ import FileHandler from './components/FileHandler';
 import './assets/styles/app.css';
 
 function App() {
-
   return (
     <div>
       <Layout>

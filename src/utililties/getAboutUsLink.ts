@@ -1,6 +1,7 @@
 const englishCode = 'en-US';
 const spanishCode = 'es-ES';
-function getAboutUsLink(language) {
+
+export function getAboutUsLink(language: string) {
   switch (language.toLowerCase()) {
     case englishCode.toLowerCase():
       return '/about-us';
@@ -9,4 +10,4 @@ function getAboutUsLink(language) {
   }
   return '';
 }
-module.exports = getAboutUsLink;
+// module.exports = getAboutUsLink;
