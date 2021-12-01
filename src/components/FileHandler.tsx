@@ -24,7 +24,7 @@ export default function FileHandler() {
       message: string;
     }
 
-    const response: object = await axios
+    const response = await axios
       .post(`${import.meta.env.VITE_API_URL}audio/upload`, formattedFilesMeta, {
         headers: { 'Content-Type': 'application/json' },
       })
