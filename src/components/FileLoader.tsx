@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addToPlayList } from '../features/audioSlice';
 import { addFiles } from '../features/fileSlice';
 
 interface FileData {
-  name: String;
-  type: String;
-  size: Number;
-  lastModified: String;
-  localUrl: String;
+  name: string;
+  type: string;
+  size: number;
+  lastModified: number;
+  localUrl: string;
 }
 
-const formatData = (files: FileData[]) => {
+const formatData = (files: Array<File>) => {
   const formattedData: FileData[] = [];
 
   files.forEach((file) => {
@@ -36,21 +36,27 @@ export default function FileLoader() {
   const dispatch = useDispatch();
 
   const handleUpload = () => {
-    const currentFiles = audioInput.current.files;
+    let currentFiles: FileList;
 
-    // Read files for their file names
-    let fileNames = Array.from(currentFiles).map((file) => file.name);
-    setFilenamesList(fileNames);
+    if (null !== audioInput.current) {
+      currentFiles = audioInput.current.files as FileList;
 
-    // Read files and create binary string
-    let newAudioElements = Array.from(currentFiles).map((file) =>
-      URL.createObjectURL(file)
-    );
-    dispatch(addToPlayList(newAudioElements));
+      // Read files for their file names
+      let fileNames = Array.from(currentFiles).map((file) => file.name);
+      setFilenamesList(fileNames);
 
-    // Read files and create meta objects
-    dispatch(addFiles(formatData(Array.from(currentFiles))));
+      // Read files and create binary string
+      let newAudioElements = Array.from(currentFiles).map((file) =>
+        URL.createObjectURL(file)
+      );
+      dispatch(addToPlayList(newAudioElements));
+
+      // Read files and create meta objects
+      dispatch(addFiles(formatData(Array.from(currentFiles))));
+    }
   };
+
+  useLayoutEffect(() => {});
 
   return (
     <div className="uploader__wrapper">

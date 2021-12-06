@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
+interface FileData {
+  name: string;
+  type: string;
+  size: number;
+  lastModified: string;
+  localUrl: string;
+}
+
 export default function FileHandler() {
   const filesMeta = useSelector((state) => state.file.filesMeta);
   const [formattedFilesMeta, setFormattedFilesMeta] = useState([]);
@@ -9,7 +17,7 @@ export default function FileHandler() {
     `I'm the File Handler Component, thank you for making me real.`
   );
 
-  const fileReader = async (files) => {
+  const fileReader = async (files: FileData[]) => {
     for (const file of files) {
       let blob = await fetch(file.localUrl).then((res) => res.blob());
       var fd = new FormData();
