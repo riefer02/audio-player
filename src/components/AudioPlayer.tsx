@@ -11,10 +11,6 @@ export default function AudioPlayer() {
   const [rightClick, setRightClick] = useState(false);
   const [leftClick, setLeftClick] = useState(false);
 
-  useEffect(() => {
-    handleAudioSrc(playlist, curIndex);
-  }, []);
-
   const handleAudioSrc = (list, curIndex) => {
     setPlayer(new Audio(list[curIndex]));
   };
