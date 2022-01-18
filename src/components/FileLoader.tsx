@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { addToPlayList } from '../features/audioSlice';
+import { addToPlayList } from '../features/playlistSlice';
 import { addFiles } from '../features/fileSlice';
 
 interface FileData {
@@ -29,9 +29,7 @@ const formatData = (files: Array<File>) => {
 };
 
 export default function FileLoader() {
-  const [filenameList, setFilenamesList] = useState([
-    'Please Upload Your Audio',
-  ]);
+  const [filenameList, setFilenamesList] = useState(['']);
   const audioInput = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
@@ -56,24 +54,22 @@ export default function FileLoader() {
     }
   };
 
-  useLayoutEffect(() => {});
-
   return (
-    <div className="uploader__wrapper">
+    <div className="file-uploader__wrapper">
       <div>
-        <button className="uploader__button">
+        <button className="file-uploader__button">
           Upload a file
           <input
-            className="uploader__input"
+            className="file-uploader__input"
             ref={audioInput}
             type="file"
             onInput={handleUpload}
           />
         </button>
       </div>
-      <div className="uploader__file-list">
+      <div className="file-uploader__file-list">
         {filenameList.map((filename, index) => (
-          <div className="uploader__file-item" key={index}>
+          <div className="file-uploader__file-item" key={index}>
             {filename}
           </div>
         ))}

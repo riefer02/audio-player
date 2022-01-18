@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPlayState, setCurIndex } from '../features/audioSlice';
+import { setPlayState, setCurIndex } from '../features/playlistSlice';
+import InfoDisplay from './InfoDisplay';
 
 export default function AudioPlayer() {
   const dispatch = useDispatch();
-  const playlist = useSelector((state) => state.audio.audioPlayList);
-  const isPlaying = useSelector((state) => state.audio.isPlaying);
-  const curIndex = useSelector((state) => state.audio.curAudioIndex);
+  const playlist = useSelector((state) => state.playlist.audioPlayList);
+  const isPlaying = useSelector((state) => state.playlist.isPlaying);
+  const curIndex = useSelector((state) => state.playlist.curAudioIndex);
   const [player, setPlayer] = useState(new Audio());
   const [rightClick, setRightClick] = useState(false);
   const [leftClick, setLeftClick] = useState(false);
@@ -54,10 +55,13 @@ export default function AudioPlayer() {
 
   return (
     <div className="audio-player">
+      <div className="playlight__wrapper">
+        <div
+          className={`playlight ${isPlaying ? 'playlight--on' : ''} mr-auto`}
+        ></div>
+        <InfoDisplay />
+      </div>
       <div className="flex w-full align-center justify-center">
-        <div className="light__wrapper">
-          <div className={`light ${isPlaying ? 'light--on' : ''}`}></div>
-        </div>
         <button
           onClick={() => {
             changeAudioSrc(curIndex, 0);
@@ -79,14 +83,14 @@ export default function AudioPlayer() {
           onClick={() => {
             retreatTime();
           }}
-          className={`button  ${leftClick ? 'clicked' : ''}`}
-          onAnimationEnd={() => setRightClick(false)}
+          className={`playlist__control  ${leftClick ? 'clicked' : ''}`}
+          onAnimationEnd={() => setLeftClick(false)}
         >
           &larr;
         </div>
         {/* Play/Stop Button */}
         <div
-          className="button"
+          className="playlist__control"
           onClick={() => {
             isPlaying
               ? dispatch(setPlayState(false))
@@ -100,7 +104,7 @@ export default function AudioPlayer() {
           onClick={() => {
             advanceTime();
           }}
-          className={`button  ${rightClick ? 'clicked' : ''}`}
+          className={`playlist__control  ${rightClick ? 'clicked' : ''}`}
           onAnimationEnd={() => setRightClick(false)}
         >
           &rarr;

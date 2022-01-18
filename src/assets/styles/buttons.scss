@@ -1,0 +1,19 @@
+.button {
+  font-size: 3rem;
+  width: 100%;
+  justify-content: center;
+  user-select: none;
+  transition: ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+}
+
+.clicked {
+  animation: click-reaction ease-out 0.2s;
+}
+
+.button:hover {
+  cursor: pointer;
+}

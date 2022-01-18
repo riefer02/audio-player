@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import audioReducer from '../features/audioSlice';
+import playlistReducer from '../features/playlistSlice';
 import fileReducer from '../features/fileSlice';
 
 export const store = configureStore({
   reducer: {
-    audio: audioReducer,
+    playlist: playlistReducer,
     file: fileReducer,
   },
   middleware: (getDefaultMiddleware) =>

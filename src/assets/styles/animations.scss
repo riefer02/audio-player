@@ -1,0 +1,11 @@
+@keyframes click-reaction {
+  0% {
+    background-color: $color-white;
+  }
+  50% {
+    background-color: rgba($color-primary, 0.2);
+  }
+  100% {
+    background-color: $color-white;
+  }
+}

@@ -1,10 +1,7 @@
 button {
-  background-color: white;
-  color: #000000;
   border: 0px solid black;
   border-radius: 2px;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.9);
-  border: 2px solid black;
+  border: 2px solid $color-white;
   padding: 5px 8px;
   margin: 0 10px;
   font-size: 0.8rem;
@@ -12,21 +9,15 @@ button {
   text-transform: uppercase;
 }
 
-.uploader__wrapper {
-  background-color: rgb(230, 230, 230);
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  padding: 1rem;
-  grid-area: three;
+.file-uploader__wrapper {
+  padding: 8px 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.uploader__button {
-  border: 2px solid black;
-  background-color: white;
+.file-uploader__button {
+  border: 2px solid $color-white;
   padding: 0.5rem 1rem;
   border-radius: 3px;
   font-size: 0.8rem;
@@ -37,12 +28,12 @@ button {
   cursor: pointer;
 }
 
-.uploader__wrapper {
+.file-uploader__wrapper {
   display: flex;
   flex-direction: column;
 }
 
-.uploader__wrapper input[type='file'] {
+.file-uploader__wrapper input[type='file'] {
   position: absolute;
   top: 0;
   right: 0;
@@ -53,7 +44,6 @@ button {
   filter: alpha(opacity=0);
   opacity: 0;
   outline: none;
-  background: white;
   cursor: inherit;
   display: block;
   cursor: pointer;
@@ -65,7 +55,7 @@ input[type=file]::-webkit-file-upload-button {
   cursor: pointer;
 }
 
-.uploader__input {
+.file-uploader__input {
   display: inline-block;
   width: 100%;
   position: absolute;
@@ -74,9 +64,9 @@ input[type=file]::-webkit-file-upload-button {
   cursor: pointer;
 }
 
-.uploader__file-list {
+.file-uploader__file-list {
   margin-top: 0.5rem;
 }
 
-.uploader__file-item {
+.file-uploader__file-item {
 }

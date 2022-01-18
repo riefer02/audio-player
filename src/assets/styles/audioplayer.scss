@@ -1,7 +1,6 @@
 .audio-player {
   width: 800px;
   padding: 1rem;
-  background-color: rgb(235, 235, 235);
 }
 
 .row {
@@ -10,7 +9,24 @@
   align-items: center;
 }
 
-.button {
+.playlight__wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.playlight {
+  @apply shadow-md;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: $color-primary;
+}
+.playlight--on {
+  background-color: $color-green;
+}
+
+.playlist__control {
   font-size: 3rem;
   width: 100%;
   justify-content: center;
@@ -23,47 +39,9 @@
 }
 
 .clicked {
-  animation: glow 0.2s, darken 0.2s;
+  animation: click-reaction ease-out 0.2s;
 }
 
-.button:hover {
-  background-color: white;
+.playlist__control:hover {
   cursor: pointer;
-}
-
-.light__wrapper {
-  display: flex;
-  justify-content: center;
-  padding: 0.5rem;
-}
-
-.light {
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
-  background-color: rgb(213, 72, 72);
-}
-.light--on {
-  background-color: rgb(4, 184, 4);
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 10px -10px #aef4af;
-  }
-  to {
-    box-shadow: 0 0 10px 40px rgba(174, 244, 175, 0.2);
-  }
-}
-
-@keyframes darken {
-  0% {
-    background-color: rgb(235, 235, 235);
-  }
-  50% {
-    background-color: rgba(255, 133, 245, 0.509);
-  }
-  100% {
-    background-color: rgb(235, 235, 235);
-  }
 }

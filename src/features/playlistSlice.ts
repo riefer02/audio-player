@@ -1,19 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// const initialSong = {
-//   name: 'Guitar Sample',
-//   fileUrl: 'src/assets/audio/guitar-sample-1.wav',
-//   id: '1',
-// };
-
 const initialState = {
   audioPlayList: ['src/assets/audio/guitar-sample-1.wav'],
   isPlaying: false,
   curAudioIndex: 0,
+  curSongName: 'guitar-sample-1',
 };
 
-export const audioSlice = createSlice({
-  name: 'audio',
+export const playlistSlice = createSlice({
+  name: 'playlist',
   initialState,
   reducers: {
     addToPlayList: (state, action) => {
@@ -34,6 +29,6 @@ export const audioSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { addToPlayList, removeFromPlayList, setPlayState, setCurIndex } =
-  audioSlice.actions;
+  playlistSlice.actions;
 
-export default audioSlice.reducer;
+export default playlistSlice.reducer;

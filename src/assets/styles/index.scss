@@ -1,8 +1,11 @@
-@use './filereader.scss';
+@import './variables.scss';
+@import './animations.scss';
+@import './base.scss';
 @import './fonts.scss';
+@import './layout.scss';
+@import './header.scss';
+@import './buttons.scss';
+@import './infodisplay.scss';
 @import './audioplayer.scss';
 @import './fileloader.scss';
 @import './filehandler.scss';
-@import './header.scss';
-@import './layout.scss';
-@import './base.scss';
