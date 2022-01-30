@@ -61,7 +61,7 @@ export default function AudioPlayer() {
         ></div>
         <InfoDisplay />
       </div>
-      <div className="flex w-full align-center justify-center">
+      <div className="">
         <button
           onClick={() => {
             changeAudioSrc(curIndex, 0);
@@ -78,7 +78,6 @@ export default function AudioPlayer() {
         </button>
       </div>
       <div className="row">
-        {/* Rewind Button */}
         <div
           onClick={() => {
             retreatTime();
@@ -88,7 +87,6 @@ export default function AudioPlayer() {
         >
           &larr;
         </div>
-        {/* Play/Stop Button */}
         <div
           className="playlist__control"
           onClick={() => {
@@ -99,7 +97,6 @@ export default function AudioPlayer() {
         >
           {isPlaying ? <div>&mdash;</div> : <div>&gt;</div>}
         </div>
-        {/* Advance Button */}
         <div
           onClick={() => {
             advanceTime();

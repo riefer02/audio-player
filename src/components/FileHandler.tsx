@@ -51,10 +51,6 @@ export default function FileHandler() {
     fileReader(filesMeta);
   }, [filesMeta]);
 
-  useEffect(() => {
-    console.log('Formatted Files Meta Data', formattedFilesMeta);
-  }, [formattedFilesMeta]);
-
   return (
     <div className="file-handler">
       <div className="file-handler__message">{message}</div>
