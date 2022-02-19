@@ -41,10 +41,8 @@ export default function FileHandler() {
     setMessage(response.message);
   };
 
-  const handleSubmit = () => {
-    // Change to forEach file callAPI()
+  const handleSubmit = () =>
     filesMeta.length > 0 ? callAPI() : setMessage(`There's nothing to send.`);
-  };
 
   useEffect(() => {
     filesMeta.length > 0 ? setMessage(`I've got some data for you.`) : null;
