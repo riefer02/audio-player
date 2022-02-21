@@ -13,16 +13,16 @@ interface FileData {
 export default function FileHandler() {
   const filesMeta = useSelector((state) => state.file.filesMeta);
   const [formattedFilesMeta, setFormattedFilesMeta] = useState([]);
-  const [message, setMessage] = useState(
-    `I'm the File Handler Component, thank you for making me real.`
-  );
+  const [message, setMessage] = useState(`...`);
 
   const fileReader = async (files: FileData[]) => {
     for (const file of files) {
-      let blob = await fetch(file.localUrl).then((res) => res.blob());
-      var fd = new FormData();
+      const blob = await fetch(file.localUrl).then((res) => res.blob());
+      const fd = new FormData();
+
       fd.append('upload-meta', JSON.stringify(file));
       fd.append('upload-file', blob, file.name);
+
       setFormattedFilesMeta(fd);
     }
   };
@@ -49,14 +49,23 @@ export default function FileHandler() {
     fileReader(filesMeta);
   }, [filesMeta]);
 
+  const fetchAudioFile = async () => {
+    const url = `${import.meta.env.VITE_API_URL}audio/`;
+
+    await axios
+      .post(url, { message: 'Hi' })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err.message));
+  };
+
   return (
     <div className="file-handler">
-      <div className="file-handler__message">{message}</div>
-      <button
-        className="file-handler__submit-btn"
-        onClick={() => handleSubmit()}
-      >
+      <div className="">{message}</div>
+      <button className="btn" onClick={() => handleSubmit()}>
         Submit
+      </button>
+      <button className="btn" onClick={() => fetchAudioFile()}>
+        Call API
       </button>
     </div>
   );

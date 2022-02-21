@@ -52,46 +52,36 @@ export default function AudioPlayer() {
 
   return (
     <div className="audio-player">
-      <div className="playlight__wrapper">
-        <div
-          className={`playlight ${isPlaying ? 'playlight--on' : ''} mr-auto`}
-        ></div>
-        <InfoDisplay />
-      </div>
-      <div className="">
-        <button onClick={() => changeAudioSrc(curIndex, false)}>
-          Prev Song
-        </button>
-        <button onClick={() => changeAudioSrc(curIndex, true)}>
-          Next Song
-        </button>
-      </div>
-      <div className="row">
-        <div
-          onClick={() => retreatTime()}
-          className={`playlist__control  ${leftClick ? 'clicked' : ''}`}
-          onAnimationEnd={() => setLeftClick(false)}
-        >
-          Scrub Backwards
-        </div>
-        <div
-          className="playlist__control"
-          onClick={() =>
-            isPlaying
-              ? dispatch(setPlayState(false))
-              : dispatch(setPlayState(true))
-          }
-        >
-          {isPlaying ? <div>&mdash;</div> : <div>&gt;</div>}
-        </div>
-        <button
-          onClick={() => advanceTime()}
-          className={`playlist__control ${rightClick ? 'clicked' : ''}`}
-          onAnimationEnd={() => setRightClick(false)}
-        >
-          Scrub Forward
-        </button>
-      </div>
+      <button className="btn" onClick={() => changeAudioSrc(curIndex, false)}>
+        Prev Song
+      </button>
+      <button className="btn" onClick={() => changeAudioSrc(curIndex, true)}>
+        Next Song
+      </button>
+      <button
+        onClick={() => retreatTime()}
+        className={`btn  ${leftClick ? 'clicked' : ''}`}
+        onAnimationEnd={() => setLeftClick(false)}
+      >
+        Scrub Backwards
+      </button>
+      <button
+        className="btn"
+        onClick={() =>
+          isPlaying
+            ? dispatch(setPlayState(false))
+            : dispatch(setPlayState(true))
+        }
+      >
+        {isPlaying ? <div>&mdash;</div> : <div>Play</div>}
+      </button>
+      <button
+        onClick={() => advanceTime()}
+        className={`btn ${rightClick ? 'clicked' : ''}`}
+        onAnimationEnd={() => setRightClick(false)}
+      >
+        Scrub Forward
+      </button>
     </div>
   );
 }
