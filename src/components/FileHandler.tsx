@@ -13,7 +13,7 @@ interface FileData {
 export default function FileHandler() {
   const filesMeta = useSelector((state) => state.file.filesMeta);
   const [formattedFilesMeta, setFormattedFilesMeta] = useState([]);
-  const [message, setMessage] = useState(`...`);
+  const [message, setMessage] = useState(``);
 
   const fileReader = async (files: FileData[]) => {
     for (const file of files) {
@@ -28,10 +28,6 @@ export default function FileHandler() {
   };
 
   const callAPI = async () => {
-    interface Response {
-      message: string;
-    }
-
     const response = await axios
       .post(`${import.meta.env.VITE_API_URL}audio/upload`, formattedFilesMeta, {
         headers: { 'Content-Type': 'application/json' },
@@ -45,22 +41,23 @@ export default function FileHandler() {
     filesMeta.length > 0 ? callAPI() : setMessage(`There's nothing to send.`);
 
   useEffect(() => {
-    filesMeta.length > 0 ? setMessage(`I've got some data for you.`) : null;
+    if (filesMeta.length > 0) setMessage(`File ready to send to database.`);
+
     fileReader(filesMeta);
   }, [filesMeta]);
 
   const fetchAudioFile = async () => {
-    const url = `${import.meta.env.VITE_API_URL}audio/`;
+    const url = `${import.meta.env.VITE_API_URL}audio/two-suns`;
 
     await axios
-      .post(url, { message: 'Hi' })
+      .get(url)
       .then((res) => console.log(res))
       .catch((err) => console.log(err.message));
   };
 
   return (
     <div className="file-handler">
-      <div className="">{message}</div>
+      <div className="alert">{message.length > 0 && message}</div>
       <button className="btn" onClick={() => handleSubmit()}>
         Submit
       </button>

@@ -22,9 +22,7 @@ export default function AudioPlayer() {
       return;
     } else if (playlist[newIndex] === undefined) {
       newIndex = isForward ? 0 : playlist.length - 1;
-
       dispatch(setCurIndex(newIndex));
-      return;
     } else {
       dispatch(setCurIndex(newIndex));
     }
@@ -73,7 +71,7 @@ export default function AudioPlayer() {
             : dispatch(setPlayState(true))
         }
       >
-        {isPlaying ? <div>&mdash;</div> : <div>Play</div>}
+        {isPlaying ? <div>Stop</div> : <div>Play</div>}
       </button>
       <button
         onClick={() => advanceTime()}
