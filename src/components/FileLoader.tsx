@@ -30,26 +30,24 @@ const formatData = (files: Array<File>) => {
 
 export default function FileLoader() {
   const dispatch = useDispatch();
-  const [filenameList, setFilenamesList] = useState(['']);
   const audioInput = useRef<HTMLInputElement>(null);
+  const [filenameList, setFilenamesList] = useState(['']);
 
   const handleUpload = () => {
     if (null !== audioInput.current) {
-      const currentFiles: FileList = audioInput.current.files as FileList;
+      const currentFiles = Array.from(audioInput.current.files);
 
-      // Read files for their file names
-      const fileNames = Array.from(currentFiles).map((file) => file.name);
-      setFilenamesList(fileNames);
+      const fileNames = currentFiles.map((file) => file.name);
 
-      // Read files and create binary string
-      const newAudioElements = Array.from(currentFiles).map((file) =>
+      const newAudioElements = currentFiles.map((file) =>
         URL.createObjectURL(file)
       );
 
+      setFilenamesList(fileNames);
+
       dispatch(addToPlayList(newAudioElements));
 
-      // Read files and create meta objects
-      dispatch(addFiles(formatData(Array.from(currentFiles))));
+      dispatch(addFiles(formatData(currentFiles)));
     }
   };
 

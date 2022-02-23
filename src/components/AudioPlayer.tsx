@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPlayState, setCurIndex } from '../features/playlistSlice';
-import InfoDisplay from './InfoDisplay';
 
 export default function AudioPlayer() {
   const dispatch = useDispatch();
@@ -9,8 +8,6 @@ export default function AudioPlayer() {
   const isPlaying: boolean = useSelector((state) => state.playlist.isPlaying);
   const curIndex: number = useSelector((state) => state.playlist.curAudioIndex);
   const [player, setPlayer] = useState(new Audio());
-  const [rightClick, setRightClick] = useState(false);
-  const [leftClick, setLeftClick] = useState(false);
 
   const handleAudioSrc = (list, curIndex: number) =>
     setPlayer(new Audio(list[curIndex]));
@@ -28,25 +25,12 @@ export default function AudioPlayer() {
     }
   };
 
-  const advanceTime = () => {
-    setRightClick(true);
-    player.currentTime = player.currentTime + 0.5;
-  };
-
-  const retreatTime = () => {
-    setLeftClick(true);
-    player.currentTime = player.currentTime - 0.5;
-  };
+  const advanceTime = () => (player.currentTime = player.currentTime + 0.5);
+  const retreatTime = () => (player.currentTime = player.currentTime - 0.5);
 
   useEffect(() => handleAudioSrc(playlist, curIndex), [curIndex, playlist]);
 
   useEffect(() => (!isPlaying ? player.pause() : player.play()), [isPlaying]);
-
-  useEffect(() => {
-    player.addEventListener('ended', () => {
-      console.log('ended');
-    });
-  }, [player]);
 
   return (
     <div className="audio-player">
@@ -56,11 +40,7 @@ export default function AudioPlayer() {
       <button className="btn" onClick={() => changeAudioSrc(curIndex, true)}>
         Next Song
       </button>
-      <button
-        onClick={() => retreatTime()}
-        className={`btn  ${leftClick ? 'clicked' : ''}`}
-        onAnimationEnd={() => setLeftClick(false)}
-      >
+      <button onClick={() => retreatTime()} className={`btn`}>
         Scrub Backwards
       </button>
       <button
@@ -73,11 +53,7 @@ export default function AudioPlayer() {
       >
         {isPlaying ? <div>Stop</div> : <div>Play</div>}
       </button>
-      <button
-        onClick={() => advanceTime()}
-        className={`btn ${rightClick ? 'clicked' : ''}`}
-        onAnimationEnd={() => setRightClick(false)}
-      >
+      <button onClick={() => advanceTime()} className={`btn`}>
         Scrub Forward
       </button>
     </div>

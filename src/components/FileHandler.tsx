@@ -18,16 +18,16 @@ export default function FileHandler() {
   const fileReader = async (files: FileData[]) => {
     for (const file of files) {
       const blob = await fetch(file.localUrl).then((res) => res.blob());
-      const fd = new FormData();
+      const formData = new FormData();
 
-      fd.append('upload-meta', JSON.stringify(file));
-      fd.append('upload-file', blob, file.name);
+      formData.append('upload-meta', JSON.stringify(file));
+      formData.append('upload-file', blob, file.name);
 
-      setFormattedFilesMeta(fd);
+      setFormattedFilesMeta(formData);
     }
   };
 
-  const callAPI = async () => {
+  const uploadAudioFile = async () => {
     const response = await axios
       .post(`${import.meta.env.VITE_API_URL}audio/upload`, formattedFilesMeta, {
         headers: { 'Content-Type': 'application/json' },
@@ -38,7 +38,9 @@ export default function FileHandler() {
   };
 
   const handleSubmit = () =>
-    filesMeta.length > 0 ? callAPI() : setMessage(`There's nothing to send.`);
+    filesMeta.length > 0
+      ? uploadAudioFile()
+      : setMessage(`There's nothing to send.`);
 
   useEffect(() => {
     if (filesMeta.length > 0) setMessage(`File ready to send to database.`);
@@ -51,7 +53,7 @@ export default function FileHandler() {
 
     await axios
       .get(url)
-      .then((res) => console.log(res))
+      .then((res) => (window.location = res.data))
       .catch((err) => console.log(err.message));
   };
 
